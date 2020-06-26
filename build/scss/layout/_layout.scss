@@ -1,0 +1,46 @@
+.container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.main-header {
+    height: 58px;
+    background-color: white;
+    font-family: HoltwoodOne;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    margin: 0;
+    z-index: 100;
+    border-bottom: 2px solid #e5e5e5;
+}
+
+main {
+    margin-top: 80px;
+}
+
+.players-list {
+    // display: grid;
+    // grid-template-columns: repeat(3, 1fr);
+    // gap: 2.25em 0;
+    margin-bottom: 90px;
+}
+
+.main-footer {
+    height: 58px;
+    background-color: white;
+    font-family: HoltwoodOne;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    margin: 0;
+    z-index: 100;
+    border-top: 2px solid #e5e5e5;
+    
+
+    ul li{
+        margin: 0 15px;
+    }
+}

@@ -1,0 +1,88 @@
+.player-info {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 500; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: $lightColor; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    color: $blackColor;
+    justify-content: initial;
+    padding: 0;
+    font-size: 12px;
+
+    &__close {
+        font-weight: bolder;
+        background-color: $blackColor;
+        border-radius: 50%;
+        font-size: 2em;
+        color: white;
+        position: absolute;
+        right: 0;
+        top: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .players-list__card {
+        // padding: 50px;
+        width: 100%;
+
+        &__name {
+            font-size: 1.58em;
+        }
+
+        &__avg {
+            font-size: 2.41em;
+        }
+
+        &__pos {
+            font-size: 1.33;
+            width: 100%;
+        }
+
+
+        &__flag {
+            width: 25px;
+        }
+    }
+}
+
+.player-stats {
+    // border: 1px solid $blackColor;
+    width: 100%;
+
+    &__title {
+        font-size: 1.3em;
+        font-weight: bolder;
+        text-align: center;
+        line-height: 1.5;
+        font-style: italic;
+    }
+
+    &__form {
+        padding: 10px;
+        label {
+            font-weight: light;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+    
+        &__fieldset {
+            margin: 15px 0;
+            
+            span {
+                font-weight: bolder;
+                font-size: 1.1em;
+                margin-left: 5px;
+            }
+        }
+
+    }
+}
+
