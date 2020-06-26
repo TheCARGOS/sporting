@@ -1,5 +1,6 @@
 import MainMenu from "./layouts/MainMenu.vue"
 import ListPlayers from "./components/ListPlayers.vue"
+import ListMatches from "./components/ListMatches.vue"
 
 export default  [
     {
@@ -8,9 +9,9 @@ export default  [
         name: "home"
     },
     {
-        path: "/menu",
-        component: MainMenu,
-        name: "menu"
+        path: "/matches",
+        component: ListMatches,
+        name: "matches"
     },
     {
         path: "/players",
