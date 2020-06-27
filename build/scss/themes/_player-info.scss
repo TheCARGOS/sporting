@@ -16,12 +16,12 @@
 
     &__close {
         font-weight: bolder;
-        background-color: $blackColor;
         border-radius: 50%;
-        font-size: 2em;
-        color: white;
+        font-size: 2.5em;
+        text-decoration: none;
+        color: $grey-color;
         position: absolute;
-        right: 0;
+        right: 15px;
         top: 0;
         text-align: center;
         display: flex;
@@ -29,26 +29,13 @@
         align-items: center;
     }
 
-    .players-list__card {
+    .players-list__item {
         // padding: 50px;
         width: 100%;
+        font-size: 13px;
 
-        &__name {
-            font-size: 1.58em;
-        }
-
-        &__avg {
-            font-size: 2.41em;
-        }
-
-        &__pos {
-            font-size: 1.33;
-            width: 100%;
-        }
-
-
-        &__flag {
-            width: 25px;
+        img {
+            height: 9em;
         }
     }
 }
@@ -81,6 +68,18 @@
                 font-size: 1.1em;
                 margin-left: 5px;
             }
+        }
+
+        &__button {
+            color: white;
+            font-weight: bolder;
+            background-color: $mid-color;
+            display: block;
+            font-size: 1em;
+            width: 100%;
+            border-radius: 8px;
+            line-height: 2;
+            border: none;
         }
 
     }

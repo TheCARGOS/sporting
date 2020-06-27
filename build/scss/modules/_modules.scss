@@ -69,11 +69,11 @@ input[type=range] {
 //   STYLING THE THUMB
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    height: 20px;
-    width: 16px;
-    border-radius: 3px;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
     // background: #ffffff;
-    background: steelblue;
+    background: $white-color;
     // background: rgba(black, .7);
     cursor: pointer;
     margin-top: -5px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
@@ -81,18 +81,18 @@ input[type=range]::-webkit-slider-thumb {
   
   /* All the same stuff for Firefox */
   input[type=range]::-moz-range-thumb {
-    height: 20px;
-    width: 16px;
-    border-radius: 3px;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
   }
   
   /* All the same stuff for IE */
   input[type=range]::-ms-thumb {
-    height: 20px;
-    width: 16px;
-    border-radius: 3px;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
     background: #ffffff;
     cursor: pointer;
   }
@@ -100,44 +100,50 @@ input[type=range]::-webkit-slider-thumb {
 //   STYLING THE TRACK
 input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
-    height: 1em;
+    height: 0.5em;
     cursor: pointer;
     background: $blackColor;
-    border-radius: 1.3px;
+    border-radius: 10px;
+    border-radius: 50%px;
   }
   
   input[type=range]:focus::-webkit-slider-runnable-track {
     background: $blackColor;
+    border-radius: 10px;
   }
   
   input[type=range]::-moz-range-track {
     width: 100%;
-    height: 1em;
+    height: 0.5em;
     cursor: pointer;
     background: $blackColor;
-    border-radius: 1.3px;
+    border-radius: 10px;
+    border-radius: 50%px;
   }
   
   input[type=range]::-ms-track {
     width: 100%;
-    height: 1em;
+    height: 0.5em;
     cursor: pointer;
     background: transparent;
     border-color: transparent;
-    border-width: 16px 0;
+    border-width: 1em 0;
     color: transparent;
   }
   input[type=range]::-ms-fill-lower {
     background: #2a6495;
-    border-radius: 2.6px;
+    border-radius: 50%px;
   }
   input[type=range]:focus::-ms-fill-lower {
     background: $blackColor;
+    border-radius: 10px;
   }
   input[type=range]::-ms-fill-upper {
     background: $blackColor;
-    border-radius: 2.6px;
+    border-radius: 10px;
+    border-radius: 50%px;
   }
   input[type=range]:focus::-ms-fill-upper {
     background: $blackColor;
+    border-radius: 10px;
   }

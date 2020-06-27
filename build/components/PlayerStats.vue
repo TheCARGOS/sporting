@@ -46,8 +46,8 @@
                 </div>
             </fieldset>
             <!-- <button>GUARDAR</button> -->
-            <button @click.prevent="ratePlayer()" >SAVE CHANGES</button>
-            <span><small>you need to be logged in in order to vote.</small><a href="#!">logged in</a></span>
+            <button class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
+            <!-- <span><small>you need to be logged in in order to vote.</small><a href="#!">logged in</a></span> -->
         </form>
     </div>
 </template>
@@ -59,6 +59,11 @@ export default {
     name: "player-stats",
     components: { PlayerSkillInput },
     props: ["player"],
+    computed: {
+        color () {
+            return 
+        }
+    },
     methods: {
         async ratePlayer () {
             const data = {
