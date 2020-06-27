@@ -1,5 +1,5 @@
 <template>
-    <div class="players-list__item" @click="setPlayerToShow()">
+    <div class="players-list__item" @click="setPlayerToShow(player)">
         <div class="flex-column">
             <div class="players-list__item__header">
                 <img class="players-list__item__img" :class="player.position" src="https://i.pinimg.com/originals/6c/f7/1e/6cf71ea97c72da175277c42a72d6ae85.jpg" alt="">
@@ -58,8 +58,12 @@ export default {
         }
     },
     methods: {
-        setPlayerToShow() {
+        setPlayerToShow(player) {
             if ( !this.sidenav ) {
+                this.$store.commit({
+                    type: "setPlayerToShow",
+                    player
+                })
                 window.eventBus.$emit("setPlayerToShow", this.player)
             }
         }

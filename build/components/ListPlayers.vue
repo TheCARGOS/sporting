@@ -20,7 +20,7 @@
         <div class="player-info flex-column" id="mySidenav" >
             <a href="#!" class="player-info__close" @click="closeSidenav">x</a>
             <player-item :player="playerToShow" sidenav="true"></player-item>
-            <player-stats :player="playerToShow"></player-stats>
+            <player-stats></player-stats>
         </div>
     </div>
 </template>
@@ -36,27 +36,8 @@ export default {
     name: "list-players",
     components: { PlayerItem, PlayerFiltered, PlayerStats },
     created () {
-        window.eventBus.$on("setPlayerToShow", player => this.setPlayerToShow(player))
+        window.eventBus.$on("setPlayerToShow", this.setPlayerToShow)
         this.$store.commit("setPlayers")
-    },
-    data () {
-        return {
-            playerToShow: {
-                "name": "SAMUEL GARCES",
-                "position": "FWD",
-                "username": "garzo",
-                "password": "2929",
-                "country": "PER",
-                "skills" : {
-                    "powerShot" : 70,
-                    "accuracy" : 70,
-                    "assist" : 70,
-                    "intercepter" : 70,
-                    "fortitude" : 65,
-                    "mark" : 75
-                }
-            }
-        }
     },
     computed: {
         allPlayers () {
@@ -70,11 +51,13 @@ export default {
         },
         fwdPlayers () {
             return this.allPlayers.filter(player => player.position == "FWD")
+        },
+        playerToShow () {
+            return this.$store.state.players.playerToShow
         }
     },
     methods: {
         setPlayerToShow (player) {
-            this.playerToShow = player
             document.getElementById("mySidenav").style.width = "300px"
             document.getElementById("mySidenav").style.padding = "30px"
             this.toggleOpacity()

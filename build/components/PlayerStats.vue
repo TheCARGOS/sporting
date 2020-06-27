@@ -4,7 +4,6 @@
             <legend class="player-stats__title">HABILIDADES</legend>
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
-                <!-- <player-skill-input :stat="player.skills.powerShot"></player-skill-input> -->
                 <div class="flex-container">
                     <input class="player-stats__form__input" type="range" value="70" min="00" max="100" v-model="player.skills.powerShot">
                     <span>{{player.skills.powerShot}}</span>
@@ -45,9 +44,7 @@
                     <span>{{player.skills.mark}}</span>
                 </div>
             </fieldset>
-            <!-- <button>GUARDAR</button> -->
             <button class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
-            <!-- <span><small>you need to be logged in in order to vote.</small><a href="#!">logged in</a></span> -->
         </form>
     </div>
 </template>
@@ -58,11 +55,10 @@ import PlayerSkillInput from "./PlayerSkillInput.vue"
 export default {
     name: "player-stats",
     components: { PlayerSkillInput },
-    props: ["player"],
     computed: {
-        color () {
-            return 
-        }
+        player () {
+            return this.$store.state.players.playerToShow
+        },
     },
     methods: {
         async ratePlayer () {

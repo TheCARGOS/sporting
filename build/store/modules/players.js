@@ -24,7 +24,8 @@ const getters = {
 const actions = {}
 
 const mutations = {
-    setPlayers: async state => state.players = await (await fetch("http://localhost:8080/api/players")).json()
+    setPlayers: async state => state.players = await (await fetch("http://localhost:8080/api/players")).json(),
+    setPlayerToShow: async (state, payload) => state.playerToShow = payload.player
 }
 
 export default {
