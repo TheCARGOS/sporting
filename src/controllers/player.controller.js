@@ -45,7 +45,7 @@ async function ratePlayer (req, res) {
         }
     }
 
-    console.log( rate )
+    console.log( req.body )
     const response = await Player.findByIdAndUpdate(id, rate)
     return res.send({message: "Played edited", message: response})
 

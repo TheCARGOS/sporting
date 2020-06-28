@@ -4,45 +4,27 @@
             <legend class="player-stats__title">HABILIDADES</legend>
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
-                <div class="flex-container">
-                    <input class="player-stats__form__input" type="range" value="70" min="00" max="100" v-model="player.skills.powerShot">
-                    <span>{{player.skills.powerShot}}</span>
-                </div>
+                <player-skill-input index="0" skillName="powerShot"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>DEFINICION AL ARCO</label>
-                <div class="flex-container">
-                    <input class="player-stats__form__input" type="range" value="70" min="00" max="100" v-model="player.skills.accuracy">
-                    <span>{{player.skills.accuracy}}</span>
-                </div>
+                <player-skill-input index="1" skillName="accuracy"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>ASISTENCIA PASE GOL</label>
-                <div class="flex-container">
-                    <input class="player-stats__form__input" type="range" value="70" min="00" max="100" v-model="player.skills.assist">
-                    <span>{{player.skills.assist}}</span>
-                </div>
+                <player-skill-input index="2" skillName="assist"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>INTERCEPTOR DE BALONES</label>
-                <div class="flex-container">
-                    <input class="player-stats__form__input" type="range" value="70" min="00" max="100" v-model="player.skills.intercepter">
-                    <span>{{player.skills.intercepter}}</span>
-                </div>
+                <player-skill-input index="3" skillName="intercepter"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>FORTALEZA</label>
-                <div class="flex-container">
-                    <input class="player-stats__form__input" type="range" value="70" min="00" max="100" v-model="player.skills.fortitude">
-                    <span>{{player.skills.fortitude}}</span>
-                </div>
+                <player-skill-input index="4" skillName="fortitude"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>MARCA</label>
-                <div class="flex-container">
-                    <input type="range" value="70" min="00" max="100" v-model="player.skills.mark">
-                    <span>{{player.skills.mark}}</span>
-                </div>
+                <player-skill-input index="5" skillName="mark"></player-skill-input>
             </fieldset>
             <button class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
         </form>
