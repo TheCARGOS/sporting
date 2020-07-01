@@ -29,6 +29,7 @@
 import PlayerItem from "./PlayerItem.vue"
 import PlayerStats from "./PlayerStats.vue"
 import PlayerFiltered from "./PlayerFiltered.vue"
+import { mapGetters } from "vuex"
 
 // import { mapGetters } from "vuex"
 
@@ -40,21 +41,13 @@ export default {
         this.$store.commit("setPlayers")
     },
     computed: {
-        allPlayers () {
-            return this.$store.state.players.players
-        },
-        defPlayers () {
-            return this.allPlayers.filter(player => player.position == "DEF")
-        },
-        midPlayers () {
-            return this.allPlayers.filter(player => player.position == "MID")
-        },
-        fwdPlayers () {
-            return this.allPlayers.filter(player => player.position == "FWD")
-        },
-        playerToShow () {
-            return this.$store.state.players.playerToShow
-        }
+        ...mapGetters([
+            "allPlayers",
+            "defPlayers",
+            "midPlayers",
+            "fwdPlayers",
+            "playerToShow"
+        ])
     },
     methods: {
         setPlayerToShow (player) {

@@ -1,0 +1,54 @@
+.player-item {
+    margin: 0 16px;
+    
+    &__header {
+        position: relative;
+    }
+
+    &__img {
+        height: 80px;
+        border-radius: 50%;
+        border: 3px solid $grey-color;
+    }
+
+    &__span {
+        position: absolute;
+        bottom: 0;
+        left: -15px;
+        color: white;
+        font-size: 1.58em;
+        padding: 2px 0.5em;
+        font-weight: bolder;
+        background-color: $black-color;
+        border-radius: 15px;
+    }
+
+    &__span2 {
+        font-size: 1.1em;
+        position: absolute;
+        bottom: 0;
+        right: -15px;
+        color: white;
+        padding: 2px 0.5em;
+        font-weight: bolder;
+        background-color: $black-color;
+        border-radius: 15px;
+    }
+
+    &__name {
+        line-height: 1.5;
+        font-size: 1.41em;
+        font-weight: bolder;
+        color: $black-color;
+    }
+
+    &__socials {
+        font-size: 1.9em;
+        color: $black-color;
+        padding: .5em 0;
+
+        i {
+            margin: 0 10px;
+        }
+    }
+}

@@ -1,4 +1,5 @@
 const { model, Schema } = require("mongoose")
+const bcrypt = require("bcryptjs")
 
 const playerSchema = new Schema({
 	name: {
@@ -70,5 +71,14 @@ const playerSchema = new Schema({
         minlength: 4
     }
 })
+
+playerSchema.pre("save", function () {
+    const salt = bcrypt.genSaltSync(10)
+    this.password = bcrypt.hashSync(this.password, salt)
+})
+
+playerSchema.methods.comparePassword = async function (password) {
+    return await bcrypt.compare(password, this.password)
+}
 
 module.exports = model("Player", playerSchema)

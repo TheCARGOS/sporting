@@ -18,7 +18,11 @@ const state = {
 }
 
 const getters = {
-    // setPlayers: async state => state.players = await fetch("http://localhost:8080/api/players")
+    allPlayers: state => this.setPlayers(),
+    defPlayers: state => state.players.filter(player => player.position == "DEF"),
+    midPlayers: state => state.players.filter(player => player.position == "MID"),
+    fwdPlayers: state => state.players.filter(player => player.position == "FWD"),
+    playerToShow: state => state.playerToShow
 }
 
 const actions = {}
