@@ -54,6 +54,8 @@ export default {
                 const response = await this.$store.dispatch("retrieveToken", data)
                 if ( !response ) {
                     alert("username or password are incorrect")
+                } else {
+                    this.$store.dispatch("getUserInfo", this.$store.state.auth.token)
                 }
             } catch (e) {
                 console.error(e)

@@ -6,7 +6,6 @@ const state = {
 const getters = {
     loggedIn (state) { return state.token !== null },
     loggedUser (state) { return this.user },
-    useRefresher (state) { return user.state }
 }
 
 const mutations = {
@@ -32,7 +31,7 @@ const actions = {
         } else {
             return false
         }
-        // now you have your token, time to log in!
+        // now you have your token, time to register our user!
     },
     async destroyToken ({commit}) {
         commit("destroyToken")
