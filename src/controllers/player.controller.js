@@ -33,8 +33,8 @@ async function postPlayer (req, res) {
 }
 
 async function ratePlayer (req, res) {
-    const id = req.body.id
-    const rate = {
+    const rateFromUser = {
+        userId: req.userId,
         skills: {
             powerShot: req.body.skills.powerShot,
             accuracy : req.body.skills.accuracy,
@@ -44,10 +44,41 @@ async function ratePlayer (req, res) {
             mark : req.body.skills.mark
         }
     }
+    // const response = await Player.findByIdAndUpdate(req.userId, rate)
+    const response = await Player.findOne({_id: req.body.id}, {rates: 1, _id: 0})
+    const rates = response.rates
+    let foundEquals = false
+    if (rates) {
+        // console.log( response )
+        rates.forEach(async rate => {
+            // console.log(rate)
+            console.log(rate.userId + " ----  " + req.userId)
+            if (rate.userId == req.userId) {
+                console.log("FINALLY EQUALSSSSS")
+                foundEquals = true
+                rate = rateFromUser
+                console.log("saving...")
+                await Player.updateOne(
+                {
+                    _id: req.body.id,
+                    "rates.userId": rate.userId
+                },
+                {
+                    $set : {"rates.$.skills": rateFromUser}
+                }
+                )
+            }
+        })
 
-    console.log( req.body )
-    const response = await Player.findByIdAndUpdate(id, rate)
-    return res.send({message: "Played edited", message: response})
+        if ( !foundEquals ) {
+            await Player.updateOne({_id: req.body.id},
+                {$push: {rates: rateFromUser}}
+            )
+
+        }
+    }
+    // return res.send({message: "Played edited", message: response})
+    return res.send({message: "Played edited", message: rates})
 
 
     // return res.json(rate)

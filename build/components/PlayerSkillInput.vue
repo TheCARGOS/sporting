@@ -2,12 +2,12 @@
     <div class="flex-container">
         <!-- <input :class="color[1]" class="player-stats__form__input" type="range" min="00" max="100" v-model="skill"> -->
         <!-- <span :class="color[0]">{{skill}}</span> -->
-        <button @click.prevent="decrement">-</button>
+        <button v-if="edit" @click.prevent="decrement">-</button>
         <div class="input">
             <div :class="color[1]" class="bar" :style="{'width': skill + '%'}"></div>
             <input style="display: none;" :class="color[1]" class="player-stats__form__input" type="range" min="00" max="100" :value="skill">
         </div>
-        <button @click.prevent="increment">></button>
+        <button v-if="edit" @click.prevent="increment">></button>
         <span :class="color[0]">{{skill}}</span>
     </div>
 </template>
@@ -15,11 +15,7 @@
 <script>
 export default {
     name: "player-skill-input",
-    props: ["skillName", "index"],
-    data() {
-        return {
-        }
-    },
+    props: ["skillName", "index", "edit"],
     methods: {
         increment: function () {
             this.$store.state.players.playerToShow.skills[this.skillName]++

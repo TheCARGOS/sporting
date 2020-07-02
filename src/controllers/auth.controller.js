@@ -24,7 +24,7 @@ async function signIn (req, res) {
 }
 
 async function userFromJWT (req, res, next) {
-    const user = await Player.findById(req.userId)
+    const user = await Player.findById(req.userId, {password: 0})
     res.json(user)
 }
 

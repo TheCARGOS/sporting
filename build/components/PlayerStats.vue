@@ -4,29 +4,29 @@
             <legend class="player-stats__title">HABILIDADES</legend>
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
-                <player-skill-input index="0" skillName="powerShot"></player-skill-input>
+                <player-skill-input :edit="loggedIn" index="0" skillName="powerShot"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>DEFINICION AL ARCO</label>
-                <player-skill-input index="1" skillName="accuracy"></player-skill-input>
+                <player-skill-input :edit="loggedIn" index="1" skillName="accuracy"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>ASISTENCIA PASE GOL</label>
-                <player-skill-input index="2" skillName="assist"></player-skill-input>
+                <player-skill-input :edit="loggedIn" index="2" skillName="assist"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>INTERCEPTOR DE BALONES</label>
-                <player-skill-input index="3" skillName="intercepter"></player-skill-input>
+                <player-skill-input :edit="loggedIn" index="3" skillName="intercepter"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>FORTALEZA</label>
-                <player-skill-input index="4" skillName="fortitude"></player-skill-input>
+                <player-skill-input :edit="loggedIn" index="4" skillName="fortitude"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>MARCA</label>
-                <player-skill-input index="5" skillName="mark"></player-skill-input>
+                <player-skill-input :edit="loggedIn" index="5" skillName="mark"></player-skill-input>
             </fieldset>
-            <button class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
+            <button v-if="loggedIn" class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
         </form>
     </div>
 </template>
@@ -41,6 +41,9 @@ export default {
         player () {
             return this.$store.state.players.playerToShow
         },
+        loggedIn () {
+            return this.$store.getters.loggedIn
+        }
     },
     methods: {
         async ratePlayer () {
@@ -59,7 +62,8 @@ export default {
             const response = await fetch("http://localhost:8080/api/player", {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + this.$store.state.auth.token
                 },
                 body: JSON.stringify(data)
             })

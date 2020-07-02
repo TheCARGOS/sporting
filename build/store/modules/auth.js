@@ -1,5 +1,5 @@
 const state = {
-    token: localStorage.getItem("Authorization") || null,
+    token: localStorage.getItem("Authorization")? localStorage.getItem("Authorization").split(" ")[1]: "" || null,
     user: {}
 }
 
@@ -25,7 +25,7 @@ const actions = {
         })
         const response = await user.json()
         if (!response.error) {
-            localStorage.setItem("Authorization", response.token)
+            localStorage.setItem("Authorization", "Bearer " + response.token)
             commit("retrieveToken", response.token)
             return true
         } else {

@@ -50,7 +50,7 @@ export default {
     methods: {
         async login () {
             try {
-                const data = {username: username.value, password: password.value}
+                const data = {username: username.value.toLowerCase(), password: password.value.toLowerCase()}
                 const response = await this.$store.dispatch("retrieveToken", data)
                 if ( !response ) {
                     alert("username or password are incorrect")

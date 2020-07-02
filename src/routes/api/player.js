@@ -5,9 +5,9 @@ const { verifyToken } = require("../../middlewares/verifyToken")
 // const passport = require("passport")
 
 router
-    .get("/players", getPlayers)
+    .get("/players", verifyToken, getPlayers)
     .post("/player", postPlayer)
-    .put("/player", ratePlayer)
+    .put("/player", verifyToken, ratePlayer)
 
 
     // .get("/profile", passport.authenticate("jwt", {session: false}), myProfile)
