@@ -1,7 +1,7 @@
 const { connect } = require("mongoose")
 
 async function startConnection () {
-    await connect("mongodb://localhost:27017/sporting", {
+    await connect("mongodb://"+ process.env.DB_HOST +"/sporting", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

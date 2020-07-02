@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const { getPlayers, postPlayer, ratePlayer } = require("../../controllers/player.controller")
-const { signIn, myProfile, verifyToken, userFromJWT } = require("../../controllers/auth.controller")
+const { signIn, userFromJWT } = require("../../controllers/auth.controller")
+const { verifyToken } = require("../../middlewares/verifyToken")
 // const passport = require("passport")
 
 router

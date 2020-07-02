@@ -4,6 +4,9 @@ const routes = require("./routes/index")
 const playersRoutes = require("./routes/api/player")
 const cors = require("cors")
 const logger = require("morgan")
+const dotenv = require("dotenv")
+
+dotenv.config()
 // const passport = require("passport")
 // const passportMiddleware = require("./middlewares/passport")
 

@@ -2,18 +2,10 @@ const Player = require("../models/Player")
 const jwt = require("jsonwebtoken")
 
 function createToken (user) {
-    return jwt.sign({id: user.id}, "secretkey", {
+    return jwt.sign({id: user.id}, process.env.SECRET_KEY, {
         expiresIn: 60 * 60
     })
 }
-
-async function verifyToken (req, res, next) {
-    const token = req.header("Authorization").split(" ")[1]
-    const decoded = jwt.verify(token, "secretkey")
-    req.userId = decoded.id
-    next()
-}
-
 
 async function signIn (req, res) {
     if (req.body.username && req.body.password) {
@@ -44,6 +36,5 @@ async function myProfile (req, res) {
 module.exports = {
     signIn,
     myProfile,
-    userFromJWT,
-    verifyToken
+    userFromJWT
 }
