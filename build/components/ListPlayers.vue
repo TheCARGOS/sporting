@@ -38,7 +38,7 @@ export default {
     components: { PlayerItem, PlayerFiltered, PlayerStats },
     created () {
         window.eventBus.$on("setPlayerToShow", this.setPlayerToShow)
-        this.$store.commit("setPlayers")
+        this.$store.dispatch("setPlayers")
     },
     computed: {
         ...mapGetters([

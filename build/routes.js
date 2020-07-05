@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard.vue"
 export default  [
     {
         path: "/",
-        component: Dashboard,
+        component: ListPlayers,
         name: "home"
     },
     {

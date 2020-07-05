@@ -8,44 +8,44 @@ const playerSchema = new Schema({
         required: true
     },
 	nickname: String,
-	skills: {
-		powerShot: {
-            type: Number,
-            minlength: 0,
-            maxlength: 110,
-            default: 70
-        },
-		accuracy: {
-            type: Number,
-            minlength: 0,
-            maxlength: 110,
-            default: 70
-        },
-		assist: {
-            type: Number,
-            minlength: 0,
-            maxlength: 110,
-            default: 70
-        },
-		intercepter: {
-            type: Number,
-            minlength: 0,
-            maxlength: 110,
-            default: 70
-        },
-		fortitude: {
-            type: Number,
-            minlength: 0,
-            maxlength: 110,
-            default: 70
-        },
-		mark: {
-            type: Number,
-            minlength: 0,
-            maxlength: 110,
-            default: 70
-        }
-    },
+	// skills: {
+	// 	powerShot: {
+    //         type: Number,
+    //         minlength: 0,
+    //         maxlength: 110,
+    //         default: 75
+    //     },
+	// 	accuracy: {
+    //         type: Number,
+    //         minlength: 0,
+    //         maxlength: 110,
+    //         default: 75
+    //     },
+	// 	assist: {
+    //         type: Number,
+    //         minlength: 0,
+    //         maxlength: 110,
+    //         default: 75
+    //     },
+	// 	intercepter: {
+    //         type: Number,
+    //         minlength: 0,
+    //         maxlength: 110,
+    //         default: 75
+    //     },
+	// 	fortitude: {
+    //         type: Number,
+    //         minlength: 0,
+    //         maxlength: 110,
+    //         default: 75
+    //     },
+	// 	mark: {
+    //         type: Number,
+    //         minlength: 0,
+    //         maxlength: 110,
+    //         default: 75
+    //     }
+    // },
     position: {
         type: String,
         required: true,
@@ -69,6 +69,10 @@ const playerSchema = new Schema({
         require: true,
         maxlength: 20,
         minlength: 4
+    },
+    urlImage: {
+        type: String,
+        required: true
     }
 })
 

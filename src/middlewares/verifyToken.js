@@ -8,7 +8,7 @@ async function verifyToken (req, res, next) {
         next()
     } catch (e) {
         req.userId = null
-        next()
+        res.json({message: "ERROR: token expired or invalid."})
     }
 }
 

@@ -1,32 +1,35 @@
 <template>
     <div class="player-stats">
         <form class="player-stats__form">
-            <legend class="player-stats__title">HABILIDADES</legend>
+            <div class="flex-container">
+                <legend class="player-stats__title">HABILIDADES</legend>
+                <button v-if="loggedIn" @click.prevent="toggleEdit()" class="player-stats__form__btn">VOTAR</button>
+            </div>
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
-                <player-skill-input :edit="loggedIn" index="0" skillName="powerShot"></player-skill-input>
+                <player-skill-input :loggedIn="loggedIn" :edit="editing" index="0" skillName="powerShot"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>DEFINICION AL ARCO</label>
-                <player-skill-input :edit="loggedIn" index="1" skillName="accuracy"></player-skill-input>
+                <player-skill-input :loggedIn="loggedIn" :edit="editing" index="1" skillName="accuracy"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>ASISTENCIA PASE GOL</label>
-                <player-skill-input :edit="loggedIn" index="2" skillName="assist"></player-skill-input>
+                <player-skill-input :loggedIn="loggedIn" :edit="editing" index="2" skillName="assist"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>INTERCEPTOR DE BALONES</label>
-                <player-skill-input :edit="loggedIn" index="3" skillName="intercepter"></player-skill-input>
+                <player-skill-input :loggedIn="loggedIn" :edit="editing" index="3" skillName="intercepter"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>FORTALEZA</label>
-                <player-skill-input :edit="loggedIn" index="4" skillName="fortitude"></player-skill-input>
+                <player-skill-input :loggedIn="loggedIn" :edit="editing" index="4" skillName="fortitude"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
                 <label>MARCA</label>
-                <player-skill-input :edit="loggedIn" index="5" skillName="mark"></player-skill-input>
+                <player-skill-input :loggedIn="loggedIn" :edit="editing" index="5" skillName="mark"></player-skill-input>
             </fieldset>
-            <button v-if="loggedIn" class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
+            <button v-if="editing" @click="toggleEdit()" class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
         </form>
     </div>
 </template>
@@ -37,37 +40,55 @@ import PlayerSkillInput from "./PlayerSkillInput.vue"
 export default {
     name: "player-stats",
     components: { PlayerSkillInput },
+    data() {
+        return {
+            edit: false
+        }
+    },
     computed: {
         player () {
             return this.$store.state.players.playerToShow
         },
+        rate () {
+            return this.$store.state.players.rate
+        },
         loggedIn () {
             return this.$store.getters.loggedIn
+        },
+        editing () {
+            return this.edit
         }
     },
     methods: {
         async ratePlayer () {
-            const data = {
+            this.$store.dispatch("ratePlayer", {
                 id: this.player._id,
                 skills: {
-                    powerShot: parseInt(this.player.skills.powerShot),
-                    accuracy: parseInt(this.player.skills.accuracy),
-                    assist: parseInt(this.player.skills.assist),
-                    intercepter: parseInt(this.player.skills.intercepter),
-                    fortitude: parseInt(this.player.skills.fortitude),
-                    mark: parseInt(this.player.skills.mark)
-                }
+                    powerShot: parseInt(this.rate.powerShot),
+                    accuracy: parseInt(this.rate.accuracy),
+                    assist: parseInt(this.rate.assist),
+                    intercepter: parseInt(this.rate.intercepter),
+                    fortitude: parseInt(this.rate.fortitude),
+                    mark: parseInt(this.rate.mark)
             }
-
-            const response = await fetch("http://localhost:8080/api/player", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer " + this.$store.state.auth.token
-                },
-                body: JSON.stringify(data)
             })
+        },
+        toggleEdit () {
+            this.edit = !this.edit
         }
     }
 }
 </script>
+
+<style lang="scss" scoped>
+    .player-stats__form__btn {
+        margin-left: 10px;
+        line-height: 1.5;
+        border: 0;
+        padding: 0 8px;
+        background: skyblue;
+        color: white;
+        font-weight: bolder;
+        border-radius: 10px;
+    }
+</style>

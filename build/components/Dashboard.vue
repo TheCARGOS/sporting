@@ -5,8 +5,9 @@
             <div class="flex-column">
                 <div class="player-item flex-container">
                     <div class="player-item__header">
-                        <img class="player-item__img" style="height: 116px;" :class="user.position" src="https://i.pinimg.com/originals/6c/f7/1e/6cf71ea97c72da175277c42a72d6ae85.jpg" alt="">
-                        <span class="player-item__span" style="font-size: 25px;" :class="color">{{averageSkill}}</span>
+                        <img class="player-item__img" style="height: 116px;" :class="user.position" :src="'/assets/photos/'+user.urlImage" alt="">
+                        <!-- <img class="player-item__img" style="height: 116px;" :class="user.position" src="https://i.pinimg.com/originals/6c/f7/1e/6cf71ea97c72da175277c42a72d6ae85.jpg" alt=""> -->
+                        <!-- <span class="player-item__span" style="font-size: 25px;" :class="color">{{averageSkill}}</span> -->
                         <span class="player-item__span2" style="font-size: 18px;" :class="user.position">{{user.position}}</span>
                     </div>
                     <div class="flex-column">

@@ -1,14 +1,14 @@
 <template>
     <div class="flex-container">
-        <!-- <input :class="color[1]" class="player-stats__form__input" type="range" min="00" max="100" v-model="skill"> -->
-        <!-- <span :class="color[0]">{{skill}}</span> -->
-        <button v-if="edit" @click.prevent="decrement">-</button>
+        <button v-if="edit" @click.prevent="updateRate(-5)"><<</button>
+        <button v-if="edit" @click.prevent="updateRate(-1)"><</button>
         <div class="input">
             <div :class="color[1]" class="bar" :style="{'width': skill + '%'}"></div>
             <input style="display: none;" :class="color[1]" class="player-stats__form__input" type="range" min="00" max="100" :value="skill">
         </div>
-        <button v-if="edit" @click.prevent="increment">></button>
-        <span :class="color[0]">{{skill}}</span>
+        <button v-if="edit" @click.prevent="updateRate(1)">></button>
+        <button v-if="edit" @click.prevent="updateRate(5)">>></button>
+        <span>{{skill.toFixed(0)}}</span>
     </div>
 </template>
 
@@ -17,26 +17,17 @@ export default {
     name: "player-skill-input",
     props: ["skillName", "index", "edit"],
     methods: {
-        increment: function () {
-            this.$store.state.players.playerToShow.skills[this.skillName]++
-            if (this.skill >= 100) {
-                this.$store.state.players.playerToShow.skills[this.skillName] = 100
-            }
-            document.getElementsByClassName("bar")[this.index].style.width = this.skill + "%"
-            
-        },
-
-        decrement: function () {
-            this.$store.state.players.playerToShow.skills[this.skillName]--
-            if (this.skill <= 0) {
-                this.$store.state.players.playerToShow.skills[this.skillName] = 0
-            }
+        updateRate: function (number) {
+            this.$store.commit("updateRate", {
+                skillName: this.skillName,
+                ammount: number
+            })
             document.getElementsByClassName("bar")[this.index].style.width = this.skill + "%"
         }
     },
     computed: {
         skill () {
-            return this.$store.state.players.playerToShow.skills[this.skillName]
+            return this.$store.state.players.rate[this.skillName]
         },
         color () {
             if ( this.skill < 75 ) {
@@ -74,7 +65,7 @@ export default {
     }
 
     button {
-        font-size: 0.58em;
+        font-size: 0.7em;
         border: none;
     }
 </style>

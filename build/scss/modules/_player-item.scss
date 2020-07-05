@@ -6,7 +6,7 @@
     }
 
     &__img {
-        height: 80px;
+        height: 6.66em;
         border-radius: 50%;
         border: 3px solid $grey-color;
     }
@@ -50,5 +50,13 @@
         i {
             margin: 0 10px;
         }
+    }
+}
+
+.player-info {
+    img {
+        font-size: 18px;
+        // height: 116px;
+        // width: 116px;
     }
 }

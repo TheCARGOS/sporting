@@ -2,7 +2,8 @@
     <div class="player-item" @click="setPlayerToShow(player)">
         <div class="flex-column">
             <div class="player-item__header">
-                <img class="player-item__img" :class="player.position" src="https://i.pinimg.com/originals/6c/f7/1e/6cf71ea97c72da175277c42a72d6ae85.jpg" alt="">
+                <img class="player-item__img" :class="player.position" :src="'/assets/photos/'+player.urlImage" alt="">
+                <!-- <img class="player-item__img" :class="player.position" src="https://i.pinimg.com/originals/6c/f7/1e/6cf71ea97c72da175277c42a72d6ae85.jpg" alt=""> -->
                 <span class="player-item__span" :class="color">{{averageSkill}}</span>
                 <span v-if="sidenav" class="player-item__span2" :class="player.position">{{player.position}}</span>
             </div>

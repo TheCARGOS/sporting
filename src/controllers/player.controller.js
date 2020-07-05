@@ -15,15 +15,16 @@ async function postPlayer (req, res) {
             rates: [],
             username: req.body.username,
             password: req.body.password,
+            urlImage: req.body.urlImage
             // skills: [],
-            skills: {
-                powerShot: req.body.skills.powerShot,
-                accuracy : req.body.skills.accuracy,
-                assist : req.body.skills.assist,
-                intercepter : req.body.skills.intercepter,
-                fortitude : req.body.skills.fortitude,
-                mark : req.body.skills.mark
-            }
+            // skills: {
+            //     powerShot: req.body.skills.powerShot,
+            //     accuracy : req.body.skills.accuracy,
+            //     assist : req.body.skills.assist,
+            //     intercepter : req.body.skills.intercepter,
+            //     fortitude : req.body.skills.fortitude,
+            //     mark : req.body.skills.mark
+            // }
         })
         const response = newPlayer.save()
         return res.send({message: "Player added successfully", response})
@@ -44,27 +45,22 @@ async function ratePlayer (req, res) {
             mark : req.body.skills.mark
         }
     }
+
     // const response = await Player.findByIdAndUpdate(req.userId, rate)
     const response = await Player.findOne({_id: req.body.id}, {rates: 1, _id: 0})
-    const rates = response.rates
     let foundEquals = false
-    if (rates) {
-        // console.log( response )
-        rates.forEach(async rate => {
-            // console.log(rate)
-            console.log(rate.userId + " ----  " + req.userId)
+    if (response.rates) {
+        response.rates.forEach(async rate => {
             if (rate.userId == req.userId) {
-                console.log("FINALLY EQUALSSSSS")
                 foundEquals = true
                 rate = rateFromUser
-                console.log("saving...")
                 await Player.updateOne(
                 {
                     _id: req.body.id,
                     "rates.userId": rate.userId
                 },
                 {
-                    $set : {"rates.$.skills": rateFromUser}
+                    $set : {"rates.$.skills": rateFromUser.skills}
                 }
                 )
             }
@@ -78,7 +74,7 @@ async function ratePlayer (req, res) {
         }
     }
     // return res.send({message: "Played edited", message: response})
-    return res.send({message: "Played edited", message: rates})
+    return res.send({message: "Played edited", message: response.rates})
 
 
     // return res.json(rate)
