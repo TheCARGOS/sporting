@@ -1,10 +1,15 @@
 const { connect } = require("mongoose")
 
 async function startConnection () {
-    await connect("mongodb://"+ process.env.DB_HOST +"/sporting", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
+    try {
+        await connect(process.env.DB_ENTIRE_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true
+        })
+    } catch (e) {
+        console.error(e)
+    }
     console.log(`We're connected`)
 }
 
