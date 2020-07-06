@@ -53,16 +53,12 @@ export default {
         setPlayerToShow (player) {
             document.getElementById("mySidenav").style.width = "300px"
             document.getElementById("mySidenav").style.padding = "30px"
-            this.toggleOpacity()
+            document.getElementById("mySidenav").classList.add("opacity")
         },
         closeSidenav () {
             document.getElementById("mySidenav").style.padding = "0px";
             document.getElementById("mySidenav").style.width = "0";
-            this.toggleOpacity()
-        },
-
-        toggleOpacity () {
-            document.getElementById("mySidenav").classList.toggle("opacity")
+            document.getElementById("mySidenav").classList.remove("opacity")
         }
     }
 }

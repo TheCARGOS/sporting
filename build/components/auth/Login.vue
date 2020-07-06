@@ -39,7 +39,6 @@ export default {
     components: {PlayerItem},
     data () {
         return {
-            userLogged: {},
             username: "",
             password: ""
         }
