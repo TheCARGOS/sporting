@@ -57,13 +57,15 @@ export default {
             document.getElementById("mySidenav").style.width = "300px"
             document.getElementById("mySidenav").style.padding = "30px"
             document.getElementById("mySidenav").classList.add("opacity")
-            document.getElementsByClassName("player-info__content")[0].style.display = "block"
+            setTimeout(() => {
+                document.getElementsByClassName("player-stats")[0].style.display = "block"
+            }, 300)
         },
         closeSidenav () {
             document.getElementById("mySidenav").style.padding = "0px";
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("mySidenav").classList.remove("opacity")
-            document.getElementsByClassName("player-info__content")[0].style.display = "none"
+            document.getElementsByClassName("player-stats")[0].style.display = "none"
         }
     }
 }

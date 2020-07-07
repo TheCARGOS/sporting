@@ -5,7 +5,7 @@
             <div class="flex-container">
         <legend class="player-stats__title">HABILIDADES</legend>
             </div>
-        <form v-if="editing || !graphView" class="player-stats__form">
+        <form v-if="editing || !graphView" class="player-stats__form animate__animated animate__fadeIn">
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
                 <player-skill-input :loggedIn="loggedIn" :edit="editing" index="0" skillName="powerShot"></player-skill-input>
@@ -32,7 +32,7 @@
             </fieldset>
             <button v-if="editing" @click="toggleEdit()" class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
         </form>
-        <chart-item v-if="viewGraph && !editing"></chart-item>
+        <chart-item class="animate__animated animate__fadeIn" v-if="viewGraph && !editing"></chart-item>
     </div>
 </template>
 
