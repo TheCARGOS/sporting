@@ -18,9 +18,11 @@
         </div>
 
         <div class="player-info flex-column" id="mySidenav" >
-            <a href="#!" class="player-info__close" @click="closeSidenav">x</a>
-            <player-item :player="playerToShow" sidenav="true"></player-item>
-            <player-stats></player-stats>
+            <div class="player-info__content">
+                <a href="#!" class="player-info__close" @click="closeSidenav">x</a>
+                <player-item :player="playerToShow" sidenav="true"></player-item>
+                <player-stats></player-stats>
+            </div>
         </div>
     </div>
 </template>
@@ -51,14 +53,17 @@ export default {
     },
     methods: {
         setPlayerToShow (player) {
+            window.eventBus.$emit("updateChart")
             document.getElementById("mySidenav").style.width = "300px"
             document.getElementById("mySidenav").style.padding = "30px"
             document.getElementById("mySidenav").classList.add("opacity")
+            document.getElementsByClassName("player-info__content")[0].style.display = "block"
         },
         closeSidenav () {
             document.getElementById("mySidenav").style.padding = "0px";
             document.getElementById("mySidenav").style.width = "0";
             document.getElementById("mySidenav").classList.remove("opacity")
+            document.getElementsByClassName("player-info__content")[0].style.display = "none"
         }
     }
 }

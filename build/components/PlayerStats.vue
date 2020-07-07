@@ -1,9 +1,9 @@
 <template>
     <div class="player-stats">
-        <form class="player-stats__form">
+        <button @click.prevent="toggleEdit()" class="player-stats__form__btn">VOTAR</button>
+        <form v-if="editing" class="player-stats__form">
             <div class="flex-container">
                 <legend class="player-stats__title">HABILIDADES</legend>
-                <button v-if="loggedIn" @click.prevent="toggleEdit()" class="player-stats__form__btn">VOTAR</button>
             </div>
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
@@ -31,15 +31,17 @@
             </fieldset>
             <button v-if="editing" @click="toggleEdit()" class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
         </form>
+        <chart-item></chart-item>
     </div>
 </template>
 
 <script>
 import PlayerSkillInput from "./PlayerSkillInput.vue"
+import ChartItem from "./ChartItem.vue"
 
 export default {
     name: "player-stats",
-    components: { PlayerSkillInput },
+    components: { PlayerSkillInput, ChartItem },
     data() {
         return {
             edit: false
@@ -72,6 +74,7 @@ export default {
                     mark: parseInt(this.rate.mark)
             }
             })
+            window.eventBus.$emit("updateChart")
         },
         toggleEdit () {
             this.edit = !this.edit
@@ -90,5 +93,6 @@ export default {
         color: white;
         font-weight: bolder;
         border-radius: 10px;
+        float: right;
     }
 </style>
