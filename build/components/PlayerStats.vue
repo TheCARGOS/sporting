@@ -1,10 +1,11 @@
 <template>
     <div class="player-stats">
-        <button @click.prevent="toggleEdit()" class="player-stats__form__btn">VOTAR</button>
-        <form v-if="editing" class="player-stats__form">
+        <button v-if="loggedIn" @click.prevent="toggleEdit()" class="player-stats__form__btn">VOTAR</button>
+        <button @click.prevent="toggleView()" class="player-stats__form__btn">{{viewMessage}}</button>
             <div class="flex-container">
-                <legend class="player-stats__title">HABILIDADES</legend>
+        <legend class="player-stats__title">HABILIDADES</legend>
             </div>
+        <form v-if="editing || !graphView" class="player-stats__form">
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
                 <player-skill-input :loggedIn="loggedIn" :edit="editing" index="0" skillName="powerShot"></player-skill-input>
@@ -31,7 +32,7 @@
             </fieldset>
             <button v-if="editing" @click="toggleEdit()" class="player-stats__form__button" @click.prevent="ratePlayer()" >SAVE CHANGES</button>
         </form>
-        <chart-item></chart-item>
+        <chart-item v-if="viewGraph && !editing"></chart-item>
     </div>
 </template>
 
@@ -44,7 +45,9 @@ export default {
     components: { PlayerSkillInput, ChartItem },
     data() {
         return {
-            edit: false
+            edit: false,
+            viewGraph: true,
+            message: "BARRAS"
         }
     },
     computed: {
@@ -59,6 +62,16 @@ export default {
         },
         editing () {
             return this.edit
+        },
+        graphView () {
+            return this.viewGraph
+        },
+        viewMessage () {
+            if (this.viewGraph) {
+                return "BARRAS"
+            } else {
+                return "GRAFICO"
+            }
         }
     },
     methods: {
@@ -78,6 +91,9 @@ export default {
         },
         toggleEdit () {
             this.edit = !this.edit
+        },
+        toggleView () {
+            this.viewGraph = !this.viewGraph
         }
     }
 }
