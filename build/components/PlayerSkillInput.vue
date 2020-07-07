@@ -1,14 +1,12 @@
 <template>
     <div class="flex-container">
-        <button v-if="edit" @click.prevent="updateRate(-5)"><<</button>
-        <button v-if="edit" @click.prevent="updateRate(-1)"><</button>
+        <button v-if="edit" @click.prevent="updateRate(-0.5)"><</button>
         <div class="input">
-            <div :class="color[1]" class="bar" :style="{'width': skill + '%'}"></div>
-            <input style="display: none;" :class="color[1]" class="player-stats__form__input" type="range" min="00" max="100" :value="skill">
+            <div :class="color[1]" class="bar" :style="{'width': skill * 10 + '%'}"></div>
+            <input style="display: none;" :class="color[1]" class="player-stats__form__input" type="range" min="0" max="10" :value="skill">
         </div>
-        <button v-if="edit" @click.prevent="updateRate(1)">></button>
-        <button v-if="edit" @click.prevent="updateRate(5)">>></button>
-        <span>{{skill.toFixed(0)}}</span>
+        <button v-if="edit" @click.prevent="updateRate(0.5)">></button>
+        <span>{{skill.toFixed(1)}}</span>
     </div>
 </template>
 
@@ -30,15 +28,15 @@ export default {
             return this.$store.state.players.rate[this.skillName]
         },
         color () {
-            if ( this.skill < 75 ) {
+            if ( this.skill < 7 ) {
                 return ["black-color", "grey-bg"]
-            } else if ( this.skill < 80 ) {
+            } else if ( this.skill < 8 ) {
                 return ["green-color", "green-bg"]
-            } else if ( this.skill < 85 ) {
+            } else if ( this.skill < 8.5 ) {
                 return ["semiorange-color", "semiorange-bg"]
-            } else if ( this.skill < 90 ) {
+            } else if ( this.skill < 9 ) {
                 return ["orange-color", "orange-bg"]
-            } else if ( this.averageSkill < 95 ) {
+            } else if ( this.averageSkill < 9.5 ) {
                 return ["red-color", "red-bg"]
             } else {
                 return ["red-color", "red-bg"]

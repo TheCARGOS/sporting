@@ -43,8 +43,8 @@ const mutations = {
     },
     updateRate: (state, rateInfo) => {
         state.rate[rateInfo.skillName] += rateInfo.ammount
-        if (state.rate[rateInfo.skillName] >= 100) {
-            state.rate[rateInfo.skillName] = 100
+        if (state.rate[rateInfo.skillName] >= 10) {
+            state.rate[rateInfo.skillName] = 10
         } else if ( state.rate[rateInfo.skillName] <= 0 ) {
             state.rate[rateInfo.skillName] = 0
         }
@@ -53,12 +53,12 @@ const mutations = {
 
 const actions = {
     setPlayers: async function ({commit}) {
-        const players = await (await fetch("/api/players")).json()
+        const players = await (await fetch("http://localhost:8080/api/players")).json()
         commit("setPlayers", players)
         setSkills(players)
     },
     ratePlayer: async function (context, rateData) {
-        const response = await fetch("/api/player", {
+        const response = await fetch("http://localhost:8080/api/player", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
