@@ -15,7 +15,7 @@
                 <player-skill-input :loggedIn="loggedIn" :edit="editing" index="1" skillName="accuracy"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
-                <label>ASISTENCIA PASE GOL</label>
+                <label>PRESICION DE PASE</label>
                 <player-skill-input :loggedIn="loggedIn" :edit="editing" index="2" skillName="assist"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">

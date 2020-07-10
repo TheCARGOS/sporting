@@ -51,7 +51,7 @@ export default {
                         display: true
                     },
                     ticks: {
-                        suggestedMin: 0,
+                        suggestedMin: 4,
                         suggestedMax: 10
                     }
                 }

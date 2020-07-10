@@ -47,37 +47,37 @@ async function ratePlayer (req, res) {
     }
 
     // const response = await Player.findByIdAndUpdate(req.userId, rate)
-    const response = await Player.findOne({_id: req.body.id}, {rates: 1, _id: 0})
-    let foundEquals = false
-    if (response.rates) {
-        response.rates.forEach(async rate => {
-            if (rate.userId == req.userId) {
-                foundEquals = true
-                rate = rateFromUser
-                await Player.updateOne(
-                {
-                    _id: req.body.id,
-                    "rates.userId": rate.userId
-                },
-                {
-                    $set : {"rates.$.skills": rateFromUser.skills}
+    if ( req.body.id != req.userId ) {
+        const response = await Player.findOne({_id: req.body.id}, {rates: 1, _id: 0})
+        let foundEquals = false
+        if (response.rates) {
+            response.rates.forEach(async rate => {
+                if (rate.userId == req.userId) {
+                    foundEquals = true
+                    rate = rateFromUser
+                    await Player.updateOne(
+                    {
+                        _id: req.body.id,
+                        "rates.userId": rate.userId
+                    },
+                    {
+                        $set : {"rates.$.skills": rateFromUser.skills}
+                    }
+                    )
                 }
+            })
+    
+            if ( !foundEquals ) {
+                await Player.updateOne({_id: req.body.id},
+                    {$push: {rates: rateFromUser}}
                 )
+    
             }
-        })
-
-        if ( !foundEquals ) {
-            await Player.updateOne({_id: req.body.id},
-                {$push: {rates: rateFromUser}}
-            )
-
         }
+        return res.send({message: response.rates})
+    } else {
+        return res.send({message: "You cannot rate yourself."})
     }
-    // return res.send({message: "Played edited", message: response})
-    return res.send({message: "Played edited", message: response.rates})
-
-
-    // return res.json(rate)
 }
 
 module.exports = {
