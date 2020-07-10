@@ -16,12 +16,12 @@ const state = {
         "urlImage": "samuelg.jpg"
     },
     rate: {
-        "powerShot" : 0,
-        "accuracy" : 0,
-        "assist" : 0,
-        "intercepter" : 0,
-        "fortitude" : 0,
-        "mark" : 0
+        "powerShot" : 5,
+        "accuracy" : 5,
+        "assist" : 5,
+        "intercepter" : 5,
+        "fortitude" : 5,
+        "mark" : 5
     }
 }
 
@@ -45,8 +45,8 @@ const mutations = {
         state.rate[rateInfo.skillName] += rateInfo.ammount
         if (state.rate[rateInfo.skillName] >= 10) {
             state.rate[rateInfo.skillName] = 10
-        } else if ( state.rate[rateInfo.skillName] <= 0 ) {
-            state.rate[rateInfo.skillName] = 0
+        } else if ( state.rate[rateInfo.skillName] <= 5 ) {
+            state.rate[rateInfo.skillName] = 5
         }
     },
 }

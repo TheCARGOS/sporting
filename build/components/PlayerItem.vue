@@ -43,15 +43,15 @@ export default {
         },
         averageSkill () {
             if ( this.player.position == "FWD" ) {
-                return parseInt(((parseInt(this.player.skills.powerShot) + parseInt(this.player.skills.accuracy)) / 2)) * 10
+                return (((parseFloat(this.player.skills.powerShot) + parseFloat(this.player.skills.accuracy)) / 2) * 10).toFixed(0)
             }
 
             if ( this.player.position == "MID" ) {
-                return parseInt(((parseInt(this.player.skills.assist) + parseInt(this.player.skills.intercepter)) / 2)) * 10
+                return (((parseFloat(this.player.skills.assist) + parseFloat(this.player.skills.intercepter)) / 2) * 10).toFixed(0)
             }
 
             if ( this.player.position == "DEF" || this.player.position == "GK") {
-                return parseInt(((parseInt(this.player.skills.fortitude) + parseInt(this.player.skills.mark)) / 2)) * 10
+                return (((parseFloat(this.player.skills.fortitude) + parseFloat(this.player.skills.mark)) / 2) * 10).toFixed(0)
             }
         },
         shortName () {

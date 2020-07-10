@@ -79,12 +79,12 @@ export default {
             this.$store.dispatch("ratePlayer", {
                 id: this.player._id,
                 skills: {
-                    powerShot: parseInt(this.rate.powerShot),
-                    accuracy: parseInt(this.rate.accuracy),
-                    assist: parseInt(this.rate.assist),
-                    intercepter: parseInt(this.rate.intercepter),
-                    fortitude: parseInt(this.rate.fortitude),
-                    mark: parseInt(this.rate.mark)
+                    powerShot: parseFloat(this.rate.powerShot),
+                    accuracy: parseFloat(this.rate.accuracy),
+                    assist: parseFloat(this.rate.assist),
+                    intercepter: parseFloat(this.rate.intercepter),
+                    fortitude: parseFloat(this.rate.fortitude),
+                    mark: parseFloat(this.rate.mark)
             }
             })
             window.eventBus.$emit("updateChart")
