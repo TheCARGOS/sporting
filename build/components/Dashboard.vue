@@ -18,7 +18,7 @@
             </div>
 
             <div class="flex-column">
-                <span class="subtitle">Tus valoraciones a...</span>
+                <span class="subtitle">Tus valoraciones <i class="fa fa-bolt" style="color: #FFDA22;"></i>...</span>
                 <div v-for="(rate, index) in ratesFromUser" :key="index" class="player-item player-item--rate flex-container">
                     <div class="player-item__header">
                         <!-- players.find(player => player._id == rate.toPlayer) -->
@@ -37,7 +37,13 @@
                     </div>
                 </div>
             </div>
+
+            <div class="flex-column">
+                <span class="subtitle" style="line-height: 3; text-align: center;">Personas que te valoran <i class="fa fa-heart red-color"></i></span>
+                <span>caracteristica no implementada de momento</span>
+            </div>
         </div>
+
 
         <div v-else>
             {{goToLogin()}}

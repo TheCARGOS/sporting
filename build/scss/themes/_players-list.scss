@@ -7,17 +7,17 @@
         .flex-container {
             justify-content: space-evenly;
 
-            .players-list__item:first-child {
+            .player-item:first-child {
                 animation: fadeInLeft;
                 animation-duration: 1s;
             }
 
-            .players-list__item:nth-child(2) {
+            .player-item:nth-child(2) {
                 animation: fadeInDown;
                 animation-duration: 1s;
             }
 
-            .players-list__item:last-child {
+            .player-item:last-child {
                 animation: fadeInRight;
                 animation-duration: 1s;
             }
