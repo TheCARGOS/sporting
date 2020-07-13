@@ -22,7 +22,9 @@ const state = {
         "intercepter" : 5,
         "fortitude" : 5,
         "mark" : 5
-    }
+    },
+    rates: [],
+    ratesFromUser: []
 }
 
 const getters = {
@@ -49,13 +51,14 @@ const mutations = {
             state.rate[rateInfo.skillName] = 5
         }
     },
+    updateRatesFromUser: (state, rates) => state.ratesFromUser = rates 
 }
 
 const actions = {
-    setPlayers: async function ({commit}) {
+    setPlayers: async function ({commit, dispatch}) {
         const players = await (await fetch("http://localhost:8080/api/players")).json()
         commit("setPlayers", players)
-        setSkills(players)
+        setSkills()
     },
     ratePlayer: async function (context, rateData) {
         const response = await fetch("http://localhost:8080/api/player", {
@@ -68,6 +71,21 @@ const actions = {
         })
 
         context.dispatch("setPlayers")
+    },
+    setRates: context => {
+        context.state.rates = []
+        context.state.players.forEach(player => {
+            if ( player.rates.length > 0 ) {
+                player.rates.forEach(rate => {
+                    context.state.rates.push(rate)
+                })
+            }
+        })
+        context.dispatch("setRatesFromUser")
+    },
+    setRatesFromUser: async (context) => {
+        const rates = context.state.rates.filter( rate => rate.userId == context.getters.loggedUser._id )
+        context.commit("updateRatesFromUser", rates)
     }
 }
 

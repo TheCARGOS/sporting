@@ -1,5 +1,6 @@
 .player-item {
     margin: 0 16px;
+
     
     &__header {
         position: relative;
@@ -9,12 +10,13 @@
         height: 6.66em;
         border-radius: 50%;
         border: 3px solid $grey-color;
+        box-shadow: 5px 5px 5px #aaaaaa;
     }
 
     &__span {
         position: absolute;
         bottom: 0;
-        left: -15px;
+        left: -1.1rem;
         color: white;
         font-size: 1.58em;
         padding: 2px 0.5em;
@@ -27,7 +29,7 @@
         font-size: 1.1em;
         position: absolute;
         bottom: 0;
-        right: -15px;
+        right: -1.1rem;
         color: white;
         padding: 2px 0.5em;
         font-weight: bolder;
@@ -67,4 +69,54 @@
     .player-item__span2 {
         font-size: 1.5em;
     }
+}
+
+.player-item--rate {
+    border-radius: 8px;
+    box-shadow: 5px 5px 5px #aaaaaa;
+    padding: 0.66em 1.16em;
+    background-color: white;
+    color: $black-color;
+
+    .player-item__header {
+    }
+
+    .player-item__img {
+        width: 45px;
+        height: 45px;
+    }
+
+    .player-item__span {
+        font-size: 10px;
+        left: -0.5rem;
+    }
+
+    .player-item__span2 {
+        font-size: 8px;
+    }
+
+    .player-item__name {
+    }
+
+    .player-item__overall {
+        font-weight: bolder;
+        font-style: italic;
+    }
+
+    .player-item__average {
+        margin-left: 1em;
+        background: $black-color;
+        font-weight: bolder;
+        padding: 3px 6px;
+        border-radius: 10px;
+    }
+
+}
+
+.subtitle {
+    font-size: 1.33em;
+    font-weight: bolder;
+    font-style: italic;
+    color: #848484;
+    margin: 1.41em 0;
 }

@@ -6,6 +6,7 @@
         <legend class="player-stats__title">HABILIDADES</legend>
             </div>
         <form v-if="editing || !graphView" class="player-stats__form animate__animated animate__fadeIn">
+            <span v-if="editing">EDITANDO....</span>
             <fieldset class="player-stats__form__fieldset">
                 <label>POTENCIA DE TIRO</label>
                 <player-skill-input :loggedIn="loggedIn" :edit="editing" index="0" skillName="powerShot"></player-skill-input>
@@ -15,7 +16,7 @@
                 <player-skill-input :loggedIn="loggedIn" :edit="editing" index="1" skillName="accuracy"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">
-                <label>PRESICION DE PASE</label>
+                <label>PRECISION DE PASE</label>
                 <player-skill-input :loggedIn="loggedIn" :edit="editing" index="2" skillName="assist"></player-skill-input>
             </fieldset>
             <fieldset class="player-stats__form__fieldset">

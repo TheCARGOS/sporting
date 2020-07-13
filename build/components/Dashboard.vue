@@ -6,8 +6,6 @@
                 <div class="player-item flex-container">
                     <div class="player-item__header">
                         <img class="player-item__img" style="height: 116px;" :class="user.position" :src="'/assets/photos/'+user.urlImage" alt="">
-                        <!-- <img class="player-item__img" style="height: 116px;" :class="user.position" src="https://i.pinimg.com/originals/6c/f7/1e/6cf71ea97c72da175277c42a72d6ae85.jpg" alt=""> -->
-                        <!-- <span class="player-item__span" style="font-size: 25px;" :class="color">{{averageSkill}}</span> -->
                         <span class="player-item__span2" style="font-size: 18px;" :class="user.position">{{user.position}}</span>
                     </div>
                     <div class="flex-column">
@@ -19,8 +17,25 @@
                 </div>
             </div>
 
-            <div class="flex-container">
-                TUS VALORIACIONES...
+            <div class="flex-column">
+                <span class="subtitle">Tus valoraciones a...</span>
+                <div v-for="(rate, index) in ratesFromUser" :key="index" class="player-item player-item--rate flex-container">
+                    <div class="player-item__header">
+                        <!-- players.find(player => player._id == rate.toPlayer) -->
+                        <img class="player-item__img" :class="players.find(player => player._id == rate.toPlayer).position" :src="'/assets/photos/'+players.find(player => player._id == rate.toPlayer).urlImage" alt="">
+                        <span class="player-item__span" :class="getColorFromNumber(averageSkill(players.find(player => player._id == rate.toPlayer)).toFixed(0))">{{averageSkill(players.find(player => player._id == rate.toPlayer)).toFixed(0)}}</span>
+                        <span class="player-item__span2" :class="players.find(player => player._id == rate.toPlayer).position">{{players.find(player => player._id == rate.toPlayer).position}}</span>
+                    </div>
+                    <div class="player-item__body flex-column">
+                        <span class="player-item__name">{{players.find(player => player._id == rate.toPlayer).name}}</span>
+                        <div class="flex-container">
+                            <span class="player-item__overall">overall:</span>
+                            <span class="player-item__average" v-if="players.find(player => player._id == rate.toPlayer).position == 'FWD'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.powerShot, rate.skills.accuracy))">{{averageSkillFromSkills(rate.skills.powerShot, rate.skills.accuracy).toFixed(0)}}</span>
+                            <span class="player-item__average" v-if="players.find(player => player._id == rate.toPlayer).position == 'MID'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.intercepter, rate.skills.assist))">{{averageSkillFromSkills(rate.skills.intercepter, rate.skills.assist).toFixed(0)}}</span>
+                            <span class="player-item__average" v-if="players.find(player => player._id == rate.toPlayer).position == 'DEF'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.fortitude, rate.skills.mark))">{{averageSkillFromSkills(rate.skills.fortitude, rate.skills.mark).toFixed(0)}}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -37,21 +52,10 @@ export default {
     name: "dashboard",
     components: {PlayerItem},
     computed: {
+        players () { return this.$store.state.players.players },
         user () { return this.$store.state.auth.user },
         loggedIn () { return this.$store.getters.loggedIn },
-        averageSkill () {
-            if ( this.user.position == "FWD" ) {
-                return parseInt(((parseInt(this.user.skills.powerShot) + parseInt(this.user.skills.accuracy)) / 2))
-            }
-
-            if ( this.user.position == "MID" ) {
-                return parseInt(((parseInt(this.user.skills.assist) + parseInt(this.user.skills.intercepter)) / 2))
-            }
-
-            if ( this.user.position == "DEF" || this.user.position == "GK") {
-                return parseInt(((parseInt(this.user.skills.fortitude) + parseInt(this.user.skills.mark)) / 2))
-            }
-        },
+        ratesFromUser () { return this.$store.state.players.ratesFromUser },
         color () {
             if ( this.averageSkill < 75 ) {
                 return "grey-color"
@@ -69,17 +73,55 @@ export default {
         }
     },
     created () {
-        this.setUser()
+        this.$store.dispatch("setPlayers")
+        this.$store.dispatch("getUserInfo", this.$store.state.auth.token)
+        this.$store.dispatch("setRates")
     },
     methods: {
-        setUser () {
-            this.$store.dispatch("getUserInfo", this.$store.state.auth.token)
-        },
         destroyToken () {
             this.$store.dispatch("destroyToken")
         },
         goToLogin () {
             this.$router.push("/login")
+        },
+        getPlayerFromId (id) {
+            const player = this.players.find(player => player._id == id)
+            return {
+                name: player.name,
+                position: player.position,
+                urlImage: player.urlImage
+            }
+        },
+        averageSkill (player) {
+            if ( player.position == "FWD" ) {
+                return parseFloat(((parseFloat(player.skills.powerShot) + parseFloat(player.skills.accuracy)) / 2)) * 10
+            }
+
+            if ( player.position == "MID" ) {
+                return parseFloat(((parseFloat(player.skills.assist) + parseFloat(player.skills.intercepter)) / 2)) * 10
+            }
+
+            if ( player.position == "DEF" || player.position == "GK") {
+                return parseFloat(((parseFloat(player.skills.fortitude) + parseFloat(player.skills.mark)) / 2)) * 10
+            }
+        },
+        averageSkillFromSkills (skill1, skill2) {
+            return parseFloat(((parseFloat(skill1) + parseFloat(skill2)) / 2)) * 10
+        },
+        getColorFromNumber (color) {
+            if ( color < 75 ) {
+                return "grey-color"
+            } else if ( color < 80 ) {
+                return "green-color"
+            } else if ( color < 85 ) {
+                return "semiorange-color"
+            } else if ( color < 90 ) {
+                return "orange-color"
+            } else if ( color < 95 ) {
+                return "red-color"
+            } else {
+                return "red-color"
+            }
         }
     }
 }

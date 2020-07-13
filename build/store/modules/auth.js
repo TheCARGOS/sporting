@@ -5,7 +5,7 @@ const state = {
 
 const getters = {
     loggedIn (state) { return state.token !== null },
-    loggedUser (state) { return this.user },
+    loggedUser (state) { return state.user },
 }
 
 const mutations = {

@@ -36,6 +36,7 @@ async function postPlayer (req, res) {
 async function ratePlayer (req, res) {
     const rateFromUser = {
         userId: req.userId,
+        toPlayer: req.body.id,
         skills: {
             powerShot: req.body.skills.powerShot,
             accuracy : req.body.skills.accuracy,

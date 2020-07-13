@@ -22,7 +22,7 @@ export default {
                 chart: {},
                 labels: ["PS", "ACC", "INT", "AST", "FOR", "MAR"],
                 datasets: [{
-                    label: 'Basado en 7 votaciones',
+                    label: 'Basado en _ votaciones',
                     data: [this.stats.powerShot, this.stats.accuracy, this.stats.assist, this.stats.intercepter, this.stats.fortitude, this.stats.mark],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
