@@ -6,12 +6,20 @@ const state = {
 const getters = {
     loggedIn (state) { return state.token !== null },
     loggedUser (state) { return state.user },
+    getUser (state) { return state.user }
 }
 
 const mutations = {
     retrieveToken (state, token) { state.token = token },
     destroyToken (state) { state.token = null },
-    setUserInfo (state, user) { state.user = user }
+    setUserInfo (state, user) {
+        if (user.error) {
+            state.user = {}
+            state.token = localStorage.removeItem('Authorization')
+        } else {
+            state.user = user
+        }
+     }
 }
 
 const actions = {

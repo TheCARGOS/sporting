@@ -1,7 +1,6 @@
 <template>
     <div class="flex-column">
         <div v-if="loggedIn">
-            <!-- <player-item :player="user" sidenav="true"></player-item> -->
             <div class="flex-column">
                 <div class="player-item flex-container">
                     <div class="player-item__header">
@@ -21,26 +20,31 @@
                 <span class="subtitle">Tus valoraciones <i class="fa fa-bolt" style="color: #FFDA22;"></i>...</span>
                 <div v-for="(rate, index) in ratesFromUser" :key="index" class="player-item player-item--rate flex-container">
                     <div class="player-item__header">
-                        <!-- players.find(player => player._id == rate.toPlayer) -->
-                        <img class="player-item__img" :class="players.find(player => player._id == rate.toPlayer).position" :src="'/assets/photos/'+players.find(player => player._id == rate.toPlayer).urlImage" alt="">
-                        <span class="player-item__span" :class="getColorFromNumber(averageSkill(players.find(player => player._id == rate.toPlayer)).toFixed(0))">{{averageSkill(players.find(player => player._id == rate.toPlayer)).toFixed(0)}}</span>
-                        <span class="player-item__span2" :class="players.find(player => player._id == rate.toPlayer).position">{{players.find(player => player._id == rate.toPlayer).position}}</span>
+                        <img class="player-item__img" :class="getPlayerFromId(rate.toPlayer).position" :src="'/assets/photos/'+getPlayerFromId(rate.toPlayer).urlImage" alt="">
+                        <span class="player-item__span" :class="getColorFromNumber(averageSkill(getPlayerFromId(rate.toPlayer)).toFixed(0))">{{averageSkill(getPlayerFromId(rate.toPlayer)).toFixed(0)}}</span>
+                        <span class="player-item__span2" :class="getPlayerFromId(rate.toPlayer).position">{{getPlayerFromId(rate.toPlayer).position}}</span>
                     </div>
                     <div class="player-item__body flex-column">
-                        <span class="player-item__name">{{players.find(player => player._id == rate.toPlayer).name}}</span>
+                        <span class="player-item__name">{{getPlayerFromId(rate.toPlayer).name}}</span>
                         <div class="flex-container">
                             <span class="player-item__overall">overall:</span>
-                            <span class="player-item__average" v-if="players.find(player => player._id == rate.toPlayer).position == 'FWD'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.powerShot, rate.skills.accuracy))">{{averageSkillFromSkills(rate.skills.powerShot, rate.skills.accuracy).toFixed(0)}}</span>
-                            <span class="player-item__average" v-if="players.find(player => player._id == rate.toPlayer).position == 'MID'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.intercepter, rate.skills.assist))">{{averageSkillFromSkills(rate.skills.intercepter, rate.skills.assist).toFixed(0)}}</span>
-                            <span class="player-item__average" v-if="players.find(player => player._id == rate.toPlayer).position == 'DEF'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.fortitude, rate.skills.mark))">{{averageSkillFromSkills(rate.skills.fortitude, rate.skills.mark).toFixed(0)}}</span>
+                            <span class="player-item__average" v-if="getPlayerFromId(rate.toPlayer).position == 'FWD'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.powerShot, rate.skills.accuracy))">{{averageSkillFromSkills(rate.skills.powerShot, rate.skills.accuracy).toFixed(0)}}</span>
+                            <span class="player-item__average" v-if="getPlayerFromId(rate.toPlayer).position == 'MID'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.intercepter, rate.skills.assist))">{{averageSkillFromSkills(rate.skills.intercepter, rate.skills.assist).toFixed(0)}}</span>
+                            <span class="player-item__average" v-if="getPlayerFromId(rate.toPlayer).position == 'DEF'" :class="getColorFromNumber(averageSkillFromSkills(rate.skills.fortitude, rate.skills.mark))">{{averageSkillFromSkills(rate.skills.fortitude, rate.skills.mark).toFixed(0)}}</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="flex-column">
-                <span class="subtitle" style="line-height: 3; text-align: center;">Personas que te valoran <i class="fa fa-heart red-color"></i></span>
-                <span>caracteristica no implementada de momento</span>
+                <span class="subtitle" style="line-height: 2; text-align: center;">Personas que te valoran <i class="fa fa-heart animate__animated animate__pulse animate__infinite red-color"></i></span>
+                <div class="flex-container">
+                    <div v-for="(rate, index) in user.rates" :key="index" class="player-item" style="margin: 0 2px;">
+                        <div class="player-item__header">
+                            <img class="player-item__img animate__animated animate__flip" style="height: 45px; width: 45px; box-shadow: none !important;" :class="getPlayerFromId(rate.userId).position" :src="'/assets/photos/'+getPlayerFromId(rate.userId).urlImage" alt="">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -59,7 +63,7 @@ export default {
     components: {PlayerItem},
     computed: {
         players () { return this.$store.state.players.players },
-        user () { return this.$store.state.auth.user },
+        user () { return this.$store.getters.getUser },
         loggedIn () { return this.$store.getters.loggedIn },
         ratesFromUser () { return this.$store.state.players.ratesFromUser },
         color () {
@@ -83,6 +87,8 @@ export default {
         this.$store.dispatch("getUserInfo", this.$store.state.auth.token)
         this.$store.dispatch("setRates")
     },
+    mounted () {
+    },
     methods: {
         destroyToken () {
             this.$store.dispatch("destroyToken")
@@ -92,11 +98,7 @@ export default {
         },
         getPlayerFromId (id) {
             const player = this.players.find(player => player._id == id)
-            return {
-                name: player.name,
-                position: player.position,
-                urlImage: player.urlImage
-            }
+            return player
         },
         averageSkill (player) {
             if ( player.position == "FWD" ) {

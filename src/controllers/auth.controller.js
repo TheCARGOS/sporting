@@ -16,10 +16,10 @@ async function signIn (req, res) {
                 res.json({token: createToken(user)}):
                 res.json({error: "Username or password is incorrect."})
         } else {
-            return res.json({error: "Username not found."})
+            return res.json({error: "Username not found.", error: true})
         }
     } else {
-        return res.json({error: "User and password are required."})
+        return res.json({error: "User and password are required.", error: true})
     }
 }
 

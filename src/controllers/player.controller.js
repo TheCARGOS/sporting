@@ -29,7 +29,7 @@ async function postPlayer (req, res) {
         const response = newPlayer.save()
         return res.send({message: "Player added successfully", response})
     } else {
-        return res.json({message: "NAME and POSITION are required."})
+        return res.json({message: "NAME and POSITION are required.", error: true})
     }
 }
 
@@ -77,7 +77,7 @@ async function ratePlayer (req, res) {
         }
         return res.send({message: response.rates})
     } else {
-        return res.send({message: "You cannot rate yourself."})
+        return res.send({message: "You cannot rate yourself.", error: "true"})
     }
 }
 

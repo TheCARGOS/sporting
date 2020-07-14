@@ -43,6 +43,9 @@ export default {
             password: ""
         }
     },
+    created () {
+        
+    },
     computed: {
         loggedIn () { return this.$store.getters.loggedIn }
     },
@@ -60,7 +63,8 @@ export default {
                 console.error(e)
             }
         },
-        goToDashboard () {
+        async goToDashboard () {
+            await this.$store.dispatch("getUserInfo", this.$store.state.auth.token)
             this.$router.push("/dashboard")
         }
     }

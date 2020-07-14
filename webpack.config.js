@@ -1,6 +1,7 @@
 const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const webpack = require("webpack")
 
 module.exports = {
     entry: "./build/index",
@@ -12,7 +13,10 @@ module.exports = {
       new HtmlWebpackPlugin({
         template: "./build/index.html"
       }),
-      new VueLoaderPlugin()
+      new VueLoaderPlugin(),
+      // new webpack.DefinePlugin({
+      //   'process.env.NODE_ENV': JSON.stringify('production')
+      // })
     ],
     module: {
         rules: [
@@ -49,5 +53,6 @@ module.exports = {
         contentBase: path.join(__dirname, './build'),
         compress: true,
         port: 9000
-    }
+    },
+    // mode: "production"
 }

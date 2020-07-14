@@ -57,8 +57,10 @@ const mutations = {
 const actions = {
     setPlayers: async function ({commit, dispatch}) {
         const players = await (await fetch("http://localhost:8080/api/players")).json()
-        commit("setPlayers", players)
-        setSkills()
+        if (players.length > 0) {
+            commit("setPlayers", players)
+            setSkills()
+        }
     },
     ratePlayer: async function (context, rateData) {
         const response = await fetch("http://localhost:8080/api/player", {
@@ -99,15 +101,19 @@ async function setSkills () {
             fortitude : 0,
             mark : 0
         }
-        await player.rates.forEach(rate => {
-            const ammount = player.rates.length
-            player.skills.powerShot += rate.skills.powerShot / ammount
-            player.skills.accuracy += rate.skills.accuracy / ammount
-            player.skills.assist += rate.skills.assist / ammount
-            player.skills.intercepter += rate.skills.intercepter / ammount
-            player.skills.fortitude += rate.skills.fortitude / ammount
-            player.skills.mark += rate.skills.mark / ammount
-        })
+        if (player.rates.length > 0) {
+            await player.rates.forEach(rate => {
+                const ammount = player.rates.length
+                if (ammount > 0 && rate.skills) {
+                    player.skills.powerShot += rate.skills.powerShot / ammount
+                    player.skills.accuracy += rate.skills.accuracy / ammount
+                    player.skills.assist += rate.skills.assist / ammount
+                    player.skills.intercepter += rate.skills.intercepter / ammount
+                    player.skills.fortitude += rate.skills.fortitude / ammount
+                    player.skills.mark += rate.skills.mark / ammount
+                }
+            })
+        }
     })
 }
 
