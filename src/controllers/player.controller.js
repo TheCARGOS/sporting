@@ -1,7 +1,7 @@
 const Player = require("../models/Player")
 
 async function getPlayers (req, res) {
-    const response = await Player.find({}, {password: 0})
+    const response = await Player.find({}, {password: 0, username: 0})
     return res.send(response)
 }
 
