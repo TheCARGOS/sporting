@@ -20,7 +20,10 @@ app
     .use( express.json() )
     // .use( passport.initialize() )
     .use( routes )
-    .use( "/api", playersRoutes );
+    .use( "/api", playersRoutes )
+    .use( "/*", (req, res, next) => {
+        res.redirect("/")
+    } )
 
     // passport.use( passportMiddleware )
 
