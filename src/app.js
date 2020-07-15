@@ -6,7 +6,10 @@ const cors = require("cors")
 const logger = require("morgan")
 const dotenv = require("dotenv")
 
-dotenv.config()
+if ( process.env.NODE_ENV !== "production" ) {
+    dotenv.config()
+}
+
 // const passport = require("passport")
 // const passportMiddleware = require("./middlewares/passport")
 

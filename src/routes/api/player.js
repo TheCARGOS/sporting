@@ -6,7 +6,7 @@ const { verifyToken } = require("../../middlewares/verifyToken")
 
 router
     .get("/players", getPlayers)
-    // .post("/player",  postPlayer)
+    .post("/player",  postPlayer)
     .put("/player", verifyToken, ratePlayer)
 
 
