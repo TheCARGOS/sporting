@@ -11,6 +11,9 @@
                 <div class="flex-container">
                     <player-item v-for="(player, index) in filteredPlayers" v-if="(index > 4) && (index <= 7)" :player="player" :key="index"></player-item>
                 </div>
+                <div class="flex-container">
+                    <player-item v-for="(player, index) in filteredPlayers" v-if="(index > 7) && (index <= 9)" :player="player" :key="index"></player-item>
+                </div>
             </div>
         </div>
     </div>
