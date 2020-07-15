@@ -47,6 +47,12 @@ async function ratePlayer (req, res) {
         }
     }
 
+    Object.keys(rateFromUser.skills).forEach(skillname => {
+        if (rateFromUser.skills[skillname] < 5) {
+            rateFromUser.skills[skillname] = 5
+        }
+    })
+
     // const response = await Player.findByIdAndUpdate(req.userId, rate)
     if ( req.body.id != req.userId ) {
         const response = await Player.findOne({_id: req.body.id}, {rates: 1, _id: 0})

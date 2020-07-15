@@ -20,10 +20,10 @@ export default {
         data () {
             return {
                 chart: {},
-                labels: ["PS", "ACC", "INT", "AST", "FOR", "MAR"],
+                labels: ["ACC", "INT", "AST", "FOR", "MAR", "PS"],
                 datasets: [{
                     label: 'Basado en _ votaciones',
-                    data: [this.stats.powerShot, this.stats.accuracy, this.stats.assist, this.stats.intercepter, this.stats.fortitude, this.stats.mark],
+                    data: [this.stats.accuracy, this.stats.assist, this.stats.intercepter, this.stats.fortitude, this.stats.mark, this.stats.powerShot],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -51,7 +51,7 @@ export default {
                         display: true
                     },
                     ticks: {
-                        suggestedMin: 4,
+                        suggestedMin: 2,
                         suggestedMax: 10
                     }
                 }
