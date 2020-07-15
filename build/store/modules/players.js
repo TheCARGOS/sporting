@@ -56,14 +56,14 @@ const mutations = {
 
 const actions = {
     setPlayers: async function ({commit, dispatch}) {
-        const players = await (await fetch("http://localhost:8080/api/players")).json()
+        const players = await (await fetch("/api/players")).json()
         if (players.length > 0) {
             commit("setPlayers", players)
             setSkills()
         }
     },
     ratePlayer: async function (context, rateData) {
-        const response = await fetch("http://localhost:8080/api/player", {
+        const response = await fetch("/api/player", {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

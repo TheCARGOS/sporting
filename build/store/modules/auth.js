@@ -24,7 +24,7 @@ const mutations = {
 
 const actions = {
     async retrieveToken ({state, commit}, payload) {
-        const user = await fetch ("http://localhost:8080/api/signin", {
+        const user = await fetch ("/api/signin", {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -46,7 +46,7 @@ const actions = {
         localStorage.removeItem('Authorization')
     },
     async getUserInfo ({commit}, token) {
-        const response = await fetch("http://localhost:8080/api/user", {
+        const response = await fetch("/api/user", {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
