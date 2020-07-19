@@ -4,7 +4,7 @@
             <div class="flex-column">
                 <div class="player-item flex-container">
                     <div class="player-item__header">
-                        <img class="player-item__img" style="height: 116px;" :class="user.position" :src="'/assets/photos/'+user.urlImage" alt="">
+                        <img class="player-item__img" style="height: 116px; width: 116px;" :class="user.position" :src="'/assets/photos/'+user.urlImage" alt="">
                         <span class="player-item__span2" style="font-size: 18px;" :class="user.position">{{user.position}}</span>
                     </div>
                     <div class="flex-column">
@@ -18,7 +18,7 @@
 
             <div class="flex-column">
                 <span class="subtitle">Tus valoraciones <i class="fa fa-bolt" style="color: #FFDA22;"></i>...</span>
-                <div v-for="(rate, index) in ratesFromUser" :key="index" class="player-item player-item--rate flex-container">
+                <div v-for="(rate, index) in ratesFromUser" :key="index" class="player-item player-item--rate flex-container" style="width: 100%; justify-content: flex-start; margin-bottom: 1em;">
                     <div class="player-item__header">
                         <img class="player-item__img" :class="getPlayerFromId(rate.toPlayer).position" :src="'/assets/photos/'+getPlayerFromId(rate.toPlayer).urlImage" alt="">
                         <span class="player-item__span" :class="getColorFromNumber(averageSkill(getPlayerFromId(rate.toPlayer)).toFixed(0))">{{averageSkill(getPlayerFromId(rate.toPlayer)).toFixed(0)}}</span>
@@ -39,7 +39,7 @@
             <div class="flex-column">
                 <span class="subtitle" style="line-height: 2; text-align: center;">Personas que te valoran <i class="fa fa-heart animate__animated animate__pulse animate__infinite red-color"></i></span>
                 <div class="flex-container">
-                    <div v-for="(rate, index) in user.rates" :key="index" class="player-item" style="margin: 0 2px;">
+                    <div v-for="(rate, index) in user.rates" :key="index" class="player-item" style="margin: 0 2px; margin-bottom: 6rem;">
                         <div class="player-item__header">
                             <img class="player-item__img animate__animated animate__flip" style="height: 45px; width: 45px; box-shadow: none !important;" :class="getPlayerFromId(rate.userId).position" :src="'/assets/photos/'+getPlayerFromId(rate.userId).urlImage" alt="">
                         </div>
@@ -143,7 +143,7 @@ button {
     font-size: 1.9em;
 }
 
-.flex-column {
-    margin-left: 1em;
+.player-item__header {
+    margin-right: 2em;
 }
 </style>
