@@ -1,13 +1,13 @@
 <template>
-    <div class="flex-column">
+    <div class="main-dashboard flex-column">
         <div v-if="loggedIn">
             <div class="flex-column">
-                <div class="player-item flex-container">
+                <div class="player-item flex-column">
                     <div class="player-item__header">
                         <img class="player-item__img" style="height: 116px; width: 116px;" :class="user.position" :src="'/assets/photos/'+user.urlImage" alt="">
                         <span class="player-item__span2" style="font-size: 18px;" :class="user.position">{{user.position}}</span>
                     </div>
-                    <div class="flex-column">
+                    <div class="flex-container">
                         <span class="player-item__name" style="font-size: 20px;">{{user.name}}</span>
                         <button @click="destroyToken()">
                             <i class="fa fa-sign-out red-color" aria-hidden="true"></i>
@@ -136,6 +136,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main-dashboard {
+    background-color: white;
+    color: #727272;
+    padding: 0 2em;
+    min-height: 70vh;
+}
+
 button {
     border: none;
     background: transparent;
