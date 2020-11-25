@@ -30,6 +30,32 @@
         <div class="profile-section" v-if="loggedIn">
             {{goToDashboard()}}
         </div>
+
+        <!-- template for the modal component -->
+        <transition name="modal" v-if="showModal">
+            <div class="modal-mask">
+                <div class="modal-wrapper">
+                    <div class="modal-container">
+
+                    <div class="modal-header">
+                        <h3>Message</h3>
+                    </div>
+
+                    <div class="modal-body">
+                        <slot name="body">
+                            Username and Password do no match.
+                        </slot>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button class="modal-default-button" @click="closeModal()">
+                            OK
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -42,7 +68,8 @@ export default {
     data () {
         return {
             username: "",
-            password: ""
+            password: "",
+            showModal: false
         }
     },
     created () {
@@ -57,7 +84,8 @@ export default {
                 const data = {username: username.value.toLowerCase(), password: password.value.toLowerCase()}
                 const response = await this.$store.dispatch("retrieveToken", data)
                 if ( !response ) {
-                    alert("username or password are incorrect")
+                    // alert("username or password are incorrect")
+                    this.showModal = true
                 } else {
                     this.$store.dispatch("getUserInfo", this.$store.state.auth.token)
                 }
@@ -68,6 +96,9 @@ export default {
         async goToDashboard () {
             await this.$store.dispatch("getUserInfo", this.$store.state.auth.token)
             this.$router.push("/dashboard")
+        },
+        closeModal () {
+            this.showModal = false
         }
     }
 }
@@ -79,6 +110,8 @@ export default {
         color: #727272;
         padding: 0 2em;
         min-height: 70vh;
+        min-width: 380px;
+        max-width: 700px;
     }
 
     .player-item {
@@ -122,8 +155,72 @@ export default {
         line-height: 2;
     }
 
-
     .profile-section {
         margin-top: 30px;
+    }
+
+    // Modal styles from Vuejs Doc.
+    .modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+    }
+
+    .modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+    }
+
+    .modal-container {
+    width: 300px;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 2px solid #42b983;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
+    }
+
+    .modal-body {
+    margin: 20px 0;
+    }
+
+    .moda-footer {
+        position: relative;
+    }
+    /*
+    * The following styles are auto-applied to elements with
+    * transition="modal" when their visibility is toggled
+    * by Vue.js.
+    *
+    * You can easily play with the modal transition by editing
+    * these styles.
+    */
+
+    .modal-enter {
+    opacity: 0;
+    }
+
+    .modal-leave-active {
+    opacity: 0;
+    }
+
+    .modal-enter .modal-container,
+    .modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
     }
 </style>
